@@ -17,6 +17,26 @@
                 <a href="listado.html">Listado</a>
             </nav>
         </header>
+        
+        <section class="caja">
+        <h2>Meriendas disponibles</h2>
+        <ul id="listaMeriendas"></ul>
+        <button id="mostrarCantidad">Mostrar cantidad</button>
+        <p id="cantidad">Cantidad: pendiente.</p>
+        </section>
     </main>
+
+    <script>
+        const meriendas = ["Café con leche", "Yogurt con granola", "Tostadas", "Medialunas", "Licuado"];
+        const listaMeriendas = document.getElementById("listaMeriendas");
+        const mostrarCantidad = document.getElementById("mostrarCantidad");
+        const cantidad = document.getElementById("cantidad");
+
+        listaMeriendas.innerHTML = meriendas.map((merienda) => `<li>${merienda}</li>`).join("");
+
+        mostrarCantidad.addEventListener("click", () => {
+        cantidad.textContent = `Cantidad: ${meriendas.length} meriendas.`;
+        });
+    </script>
 </body>
 </html>
