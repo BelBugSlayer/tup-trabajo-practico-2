@@ -17,6 +17,57 @@
                 <a href="listado.html">Listado</a>
             </nav>
         </header>
+
+        <section class="caja">
+            <p id="contador">Seleccionadas: 0</p>
+            <section id="tarjetas" class="tarjetas"></section>
+        </section>     
     </main>
+
+    <script>
+        const destacados = [
+            {
+                titulo: "Serie: Friends",
+                descripcion: "Las aventuras de seis jóvenes neoyorquinos unidos por su amistad.",
+            },
+            {
+                titulo: "Canción: Cuando pase el temblor",
+                descripcion: "Obra cargada de simbolismo y metáforas que exploran el viaje interno del ser humano frente a la adversidad y la búsqueda de la paz interior",
+            },
+            {
+                titulo: "Comida: Cheesecake",
+                descripcion: "Postre suave con base crocante y frutas por arriba.",
+            },
+            {
+                titulo: "Lugar: Jardin botánico",
+                descripcion: "Espacio tranquilo para caminar y sacar fotos.",
+            },
+        ];
+
+        const tarjetas = document.getElementById("tarjetas");
+        const contador = document.getElementById("contador");
+
+        destacados.forEach((item) => {
+            const tarjeta = document.createElement("article");
+            tarjeta.classList.add("tarjeta");
+
+            const titulo = document.createElement("h3");
+            titulo.textContent =item.titulo;
+            
+            const descripcion = document.createElement("p");
+            descripcion.textContent =item.descripcion;
+
+            tarjeta.append(titulo, descripcion);
+
+            tarjeta.addEventListener("click", () => {
+                tarjeta.classList.toggle("seleccionada");
+                
+                const seleccionadas = document.querySelectorAll(".seleccionada");
+                contador.textContent = `Seleccionadas: ${seleccionadas.length}`;
+            });
+            
+            tarjetas.appendChild(tarjeta);
+        });
+    </script>
 </body>
 </html>
