@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,16 +7,72 @@
     <link rel="stylesheet" href="estilos.css" />
 </head>
 <body>
-     <main>
+    <main>
         <header>
             <h1>Ejercicio 3: Filtrado simple de elementos</h1>
             <p>Mostrar todos los elementos o solo una categoría usando <b>filter</b></p>
+            <p>Las actividades estan clasificadas segun si se realizan en el interior de la casa o en el exterior.</p>
             <nav>
                 <a href="index.html">Inicio</a>
                 <a href="destacados.html">Destacados</a>
                 <a href="listado.html">Listado</a>
             </nav>
         </header>
+
+        <section class="caja">
+            <div class="botones">
+                <button id="mostrarTodos">Mostrar todos</button>
+                <button id="mostrarExterior">Mostrar solo exterior</button>
+            </div>
+            <section id="listaActividades" class="tarjetas"></section>
+        </section>
     </main>
+
+    <script>
+        const actividades = [
+            { nombre: "Mirar una película", categoria: "interior"},
+            { nombre: "Leer un libro", categoria: "interior"},
+            { nombre: "Preparar muffins", categoria: "interior"},
+            { nombre: "Caminar por la plaza", categoria: "exterior"},
+            { nombre: "Andar en bicicleta", categoria: "exterior"},
+            { nombre: "Pasear a los perros", categoria: "exterior"},
+        ];
+
+        const listaActividades = document.getElementById("listaActividades");
+        const mostrarTodos = document.getElementById("mostrarTodos");
+        const mostrarExterior = document.getElementById("mostrarExterior");
+
+        function mostrarListado(listado) {
+            listaActividades.innerHTML = "";
+
+            listado.forEach((actividad) => {
+                const tarjeta = document.createElement("article");
+                tarjeta.classList.add("tarjeta");
+
+                const titulo = document.createElement("h3");
+                titulo.textContent = actividad.nombre;
+
+                const categoria = document.createElement("p");
+                categoria.textContent = `Categoria: ${actividad.categoria}`;
+
+                tarjeta.append(titulo,categoria);
+                listaActividades.appendChild(tarjeta);
+            });
+        }
+
+        mostrarListado(actividades);
+
+        mostrarTodos.addEventListener("click", () => {
+            mostrarListado(actividades);
+        });
+
+        mostrarExterior.addEventListener("click", () => {
+            const actividadesExterior = actividades.filter((actividad) => {
+                return actividad.categoria === "exterior";
+            });
+
+            mostrarListado(actividadesExterior);
+        });
+    </script>
 </body>
 </html>
